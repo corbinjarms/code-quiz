@@ -48,7 +48,15 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div style="overflow: hidden;">
-          <p>Heres your score</p>
+          <p>Heres your score: </p>
+          <form>
+            <input type="text" id="leaderboard" name="leaderboard" value="">
+            <div id="leaders">
+
+            </div>
+
+            <a href="#" class="btn btn-primary" onclick="submitScoreToLeaderboard()">Submit Score</a>
+          </form>
         </div>
       </div>
     </div>

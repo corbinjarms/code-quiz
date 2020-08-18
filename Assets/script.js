@@ -34,22 +34,23 @@ for (var property in allQuestions) {
 qNum = 0;
 answerKey = ['null','A','B','C','D']
 currentScore = 0;
+currentAnswer = '';
 function score() {
   qNum += 1; 
   if (document.getElementById("A1").checked ){
-    window.localStorage.setItem(qNum, "A");
+    currentAnswer = 'A';
   }
   if (document.getElementById("A2").checked ){
-    window.localStorage.setItem(qNum, "B");
+    currentAnswer = 'B';
   }
   if (document.getElementById("A3").checked ){
-    window.localStorage.setItem(qNum, "C");
+    currentAnswer = 'C';
   }
   if (document.getElementById("A4").checked ){
-    window.localStorage.setItem(qNum, "D");
+    currentAnswer = 'D';
   }
-  let scoreCheck = window.localStorage.getItem(qNum)
-  let fakeAns = 'A';
+  let scoreCheck = currentAnswer
+
   if(scoreCheck == answerKey[qNum]) {
     currentScore += 1;
     document.getElementById("score").textContent = "Current Score: " + currentScore;
@@ -84,10 +85,16 @@ function Q1() {
 },
 
 function Q2() {
+
   score()
+  document.getElementById("A1").checked = false;
+  document.getElementById("A2").checked = false;
+  document.getElementById("A3").checked = false;
+  document.getElementById("A4").checked = false;
   document.getElementById("Question").textContent = "JavaScript _______ are containers for storing data values";
   //A1
   document.getElementById("A1-Label").textContent = "dates";
+  
   document.getElementById("A1").value = 'A';
 
   //A2
@@ -107,6 +114,10 @@ function Q2() {
 },
 function Q3() {
   score()
+  document.getElementById("A1").checked = false;
+  document.getElementById("A2").checked = false;
+  document.getElementById("A3").checked = false;
+  document.getElementById("A4").checked = false;
   document.getElementById("Question").textContent = "Select one item that is required for a javascript function";
   //A1
   document.getElementById("A1-Label").textContent = "variable";
@@ -132,6 +143,10 @@ function Q3() {
 
 function Q4() {
   score()
+  document.getElementById("A1").checked = false;
+  document.getElementById("A2").checked = false;
+  document.getElementById("A3").checked = false;
+  document.getElementById("A4").checked = false;
   document.getElementById("Question").textContent = "What are the name:value pairs in javascript objects?";
   //A1
   document.getElementById("A1-Label").textContent = "literals";
@@ -165,6 +180,8 @@ function endGame()
     x = document.getElementById("Submit")
     x.setAttribute("data-toggle","modal");
     x.setAttribute("data-target","#myModal");
+    storedInitials = Object.keys(localStorage);
+
   };
 
 function startTest() {
@@ -183,4 +200,30 @@ function change () {
     document.getElementById("Timer").textContent= "Time Remaining: " + minutes + ":" + seconds;
 }
 
+function submitScoreToLeaderboard() {
 
+  var heading = document.createElement("H2");
+  heading.innerHTML = "Scoreboard";
+  document.getElementById("leaders").appendChild(heading);
+  storedInitials = Object.keys(localStorage);
+  for ( var i = 0; i < localStorage.length; i++ ) {
+    var enterNewScore = document.createElement("P")
+    
+    storedInitials = Object.keys(localStorage);
+
+    scores = localStorage.getItem(storedInitials[i])
+    let initial = storedInitials[i]
+    let highScore = localStorage.getItem(storedInitials[i])
+    let initialHighScore = initial + ": " + highScore
+    enterNewScore.innerHTML = initialHighScore;
+    console.log("Testing this out: " +initialHighScore)
+    document.getElementById("leaders").appendChild(enterNewScore)
+  }
+  console.log(storedInitials)
+  console.log(scores)
+
+
+  
+   }
+  
+  
