@@ -200,8 +200,14 @@ function change () {
     document.getElementById("Timer").textContent= "Time Remaining: " + minutes + ":" + seconds;
 }
 
-function submitScoreToLeaderboard() {
+function getInitials () {
+  theInitials = document.getElementById("leaderboard").value;
+  return theInitials;
+}
 
+function submitScoreToLeaderboard() {
+  theInitials = getInitials ();
+  localStorage.setItem(theInitials, currentScore)
   var heading = document.createElement("H2");
   heading.innerHTML = "Scoreboard";
   document.getElementById("leaders").appendChild(heading);
