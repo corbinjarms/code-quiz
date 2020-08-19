@@ -204,6 +204,9 @@ function change () {
         seconds = 60;
     }
     seconds -= 1;
+    if (minutes && seconds <= 0){
+      endGame()
+    }
     document.getElementById("Timer").textContent= "Time Remaining: " + minutes + ":" + seconds;
 }
 
