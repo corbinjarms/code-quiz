@@ -54,6 +54,8 @@ function score() {
   if(scoreCheck == answerKey[qNum]) {
     currentScore += 1;
     document.getElementById("score").textContent = "Current Score: " + currentScore;
+  } else {
+    changePenaly () //this is the time penalty
   }
 }
 arrayOfQuestions = [
@@ -189,6 +191,11 @@ function startTest() {
   arrayOfQuestions[0]()
 }
 
+function changePenaly () {
+
+  minutes -= 5;
+ 
+}
 function change () {
     //seconds -= 1;
     document.getElementById("Timer").textContent= "Time Remaining: " + minutes + ":" + seconds;
@@ -207,29 +214,36 @@ function getInitials () {
 
 function submitScoreToLeaderboard() {
   theInitials = getInitials ();
-  localStorage.setItem(theInitials, currentScore)
+  localStorage.setItem(theInitials, currentScore);
   var heading = document.createElement("H2");
   heading.innerHTML = "Scoreboard";
   document.getElementById("leaders").appendChild(heading);
   storedInitials = Object.keys(localStorage);
   for ( var i = 0; i < localStorage.length; i++ ) {
-    var enterNewScore = document.createElement("P")
+    var enterNewScore = document.createElement("P");
     
     storedInitials = Object.keys(localStorage);
 
-    scores = localStorage.getItem(storedInitials[i])
-    let initial = storedInitials[i]
-    let highScore = localStorage.getItem(storedInitials[i])
-    let initialHighScore = initial + ": " + highScore
+    scores = localStorage.getItem(storedInitials[i]);
+    let initial = storedInitials[i];
+    let highScore = localStorage.getItem(storedInitials[i]);
+    let initialHighScore = initial + ": " + highScore;
     enterNewScore.innerHTML = initialHighScore;
-    console.log("Testing this out: " +initialHighScore)
-    document.getElementById("leaders").appendChild(enterNewScore)
+    console.log("Testing this out: " +initialHighScore);
+    document.getElementById("leaders").appendChild(enterNewScore);
+    let submitScore = document.getElementById("submitScore");
+    submitScore.textContent = "Close"
+    submitScore.onclick = "freshStart()"
   }
   console.log(storedInitials)
   console.log(scores)
 
 
   
-   }
-  
-  
+}
+
+   function freshStart() { 
+    currentScore = 0;
+    toggle = document.getElementById("submitScore")
+    toggle.setAttribute("data-toggle","modal")
+}
